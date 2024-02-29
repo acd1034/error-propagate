@@ -4,8 +4,8 @@ from types import NoneType
 from .sample import TRY, propagate
 
 
-@propagate
-def example_function(a, b):
+@propagate(NoneType)
+def try_add(a, b):
     return TRY(a) + TRY(b)
 
 
@@ -13,6 +13,6 @@ if __name__ == "__main__":
     # parser = ArgumentParser()
     # parser.add_argument("--square", type=int, default=2)
     # args = parser.parse_args()
-    print(example_function(5, 3))
-    print(example_function(None, 3))
-    print(example_function(5, None))
+    print(try_add(5, 3))
+    print(try_add(None, 3))
+    print(try_add(5, None))
