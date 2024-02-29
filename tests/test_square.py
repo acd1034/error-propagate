@@ -9,10 +9,19 @@ def try_add(a, b):
     return TRY(a) + TRY(b)
 
 
+@propagate(NoneType)
+def try_sub(a, b):
+    return TRY(a) - TRY(b)
+
+
 def test_propagate():
     assert try_add(5, 3) == 8
     assert try_add(None, 3) is None
     assert try_add(5, None) is None
+
+    a = 1
+    assert try_add(a := a + 1, a := a + 1) == 5
+    assert try_sub(a := a + 1, a := a + 1) == -1
 
 
 @dataclass
@@ -31,3 +40,11 @@ def test_custom_error():
     assert try_add1(1, 4) == 5
     assert try_add1(2, 4) == Error("arg0 equals 2")
     assert try_add1(1, 3) == Error("arg1 equals 3")
+
+
+def test_local_function():
+    @propagate(NoneType)
+    def local_try_add(a, b):
+        return TRY(a) + TRY(b)
+
+    assert local_try_add(1, 4) == 5

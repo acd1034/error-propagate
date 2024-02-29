@@ -1,6 +1,7 @@
 import ast
 import functools
 import inspect
+import textwrap
 from dataclasses import dataclass
 
 
@@ -9,11 +10,11 @@ def TRY(_arg0):  #
 
 
 def _getsource(func):
-    func.__globals__[func.__name__] = func
-    source_lines, _ = inspect.getsourcelines(func)
+    func.__globals__[func.__qualname__] = func
+    source_code = textwrap.dedent(inspect.getsource(func))
     # strip decorators from the source itself
-    source_code = "".join(
-        line for line in source_lines if not line.startswith("@")
+    source_code = "\n".join(
+        line for line in source_code.split("\n") if not line.startswith("@")
     )
     return source_code
 
