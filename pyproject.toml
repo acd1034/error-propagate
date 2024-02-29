@@ -1,0 +1,21 @@
+[tool.poetry]
+authors = ["Your Name <you@example.com>"]
+description = ""
+# empty not allowed
+name = "sample"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+# pyyaml = "^6.0.1"
+pytest = "^8.0.2"
+python = "^3.11"
+
+[tool.poetry.dev-dependencies]
+black = "^21.11b1"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+mypy = "^0.930"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]

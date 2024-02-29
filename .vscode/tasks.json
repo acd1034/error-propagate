@@ -1,0 +1,38 @@
+{
+  // https://go.microsoft.com/fwlink/?LinkId=733558
+  // https://code.visualstudio.com/docs/editor/variables-reference
+  // prettier-ignore
+  "tasks": [
+    {
+      // Run Module
+      "label": "Run Module",
+      "command": "python -m sample",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      // pytest
+      "label": "pytest",
+      "command": "pytest",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+  ],
+  "type": "shell",
+  "group": "build",
+  "options": {
+    "cwd": "${workspaceFolder}"
+  },
+  "presentation": {
+    "clear": true,
+    "echo": false,
+    "reveal": "always",
+    "showReuseMessage": true
+  },
+  "problemMatcher": "$gcc",
+  "version": "2.0.0"
+}
