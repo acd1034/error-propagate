@@ -4,22 +4,8 @@ import inspect
 from dataclasses import dataclass
 
 
-def square(n: int) -> int:
-    return n * n
-
-
-def TRY(arg0):
-    # ...
-    raise NotImplementedError()
-
-
-# replace
-#     TRY(expr)
-# with
-#     _tmpvar_ = expr
-#     if isinstance(_tmpvar_, NoneType):
-#         return _tmpvar_
-#     _tmpvar_
+def TRY(_arg0):  #
+    ...
 
 
 def _getsource(func):
