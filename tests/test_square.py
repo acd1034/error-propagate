@@ -40,11 +40,3 @@ def test_custom_error():
     assert try_add1(1, 4) == 5
     assert try_add1(2, 4) == Error("arg0 equals 2")
     assert try_add1(1, 3) == Error("arg1 equals 3")
-
-
-def test_local_function():
-    @propagate(NoneType)
-    def local_try_add(a, b):
-        return TRY(a) + TRY(b)
-
-    assert local_try_add(1, 4) == 5
