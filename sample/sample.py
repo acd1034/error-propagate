@@ -10,12 +10,13 @@ def TRY(_arg0):  #
 
 def _getsource(func):
     func.__globals__[func.__name__] = func
-    source_code = inspect.getsource(func)
+    source_lines, lineno = inspect.getsourcelines(func)
+    source_file = inspect.getsourcefile(func)
     # strip decorators from the source itself
-    source_code = "\n".join(
-        line for line in source_code.split("\n") if not line.startswith("@")
+    source_code = "".join(
+        line for line in source_lines if not line.startswith("@")
     )
-    return source_code
+    return "\n" * lineno + source_code, source_file
 
 
 def _unique_id() -> int:
@@ -75,7 +76,7 @@ def _rewrite_func_body(func_body: list[ast.stmt], ErrorType: type):
 
 def propagate(ErrorType: type):
     def propagate_wrapper(func):
-        source = _getsource(func)
+        source, file = _getsource(func)
         tree = ast.parse(source)
 
         assert len(tree.body) == 1
@@ -85,7 +86,7 @@ def propagate(ErrorType: type):
         new_tree = ast.fix_missing_locations(tree)
 
         # get the compiled function
-        new_func = compile(new_tree, "<ast>", "exec")
+        new_func = compile(new_tree, file, "exec")
         namespace = {}
         exec(new_func, func.__globals__, namespace)
         new_func = namespace[func.__name__]
