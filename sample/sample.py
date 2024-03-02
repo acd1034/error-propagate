@@ -2,9 +2,12 @@ import ast
 import functools
 import inspect
 from dataclasses import dataclass
+from typing import TypeVar
+
+_T = TypeVar("_T")
 
 
-def TRY(_arg0):  #
+def TRY(expr: _T) -> _T:  # not defined
     ...
 
 
